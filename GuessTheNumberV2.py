@@ -1,30 +1,40 @@
 import random
 Game = str(print( "\033[1m" +"WELCOME TO GUESS THE NUMBER"+ "\033[0m"))
+str(print("\033[1m" +"SELECT WHICH GAMEMODE YOU WANT TO PLAY. "+ "\033[0m"))
 
-str(print("\033[1m" +"SELECT WHAT GAMEMODE YOU WANT TO PLAY. "+ "\033[0m"))
-GameMode_Selection = int(input("Press 1 to make computer guess your Number, "
-                      "Press 2 For you to Guess Computers Number,"
-                      " Press 3 to Exit : "))
+Valid2 = "No"
+while Valid2 == "No":
+    try:
+        GameMode_Selection = int(input("1 - Computer Guesses\n2 - You Guess\n3 - Exit\nEnter : "))
+    except Exception:
+        print("Enter 1/2/3 ONLY.")
+    if GameMode_Selection >= 1 and GameMode_Selection <= 3:
+        Valid2 = "Yes"
 
 if GameMode_Selection == 1:
+    Min = 1
+    Max = 100
+    Valid = "No"
+    while Valid =="No":
+        UserNumber = int(input("Enter a Number 1-100 : "))
+        if UserNumber >= 1 and UserNumber <= 100:
+            Valid = "Yes"
 
- UserNumber = int(input("Enter a Number 1-100 : "))
- Computer_Guess = random.randint(1,100)
- ComputerPrompt = print("Is the Number "+ " = " + str(Computer_Guess))
+    UserInput = ""
+    while UserInput != "Y":
+        Computer_Guess = random.randint(Min,Max)
+        print("Is the Number "+ " = " + str(Computer_Guess))
+        UserInput = str(input("Type L For a Lower Guess, Type H for a Higher Guess, Type Y If the Answer is Correct : ")).lower()
+        if UserInput == "l":
+            Max = Computer_Guess
+        if UserInput == "h":
+            Min = Computer_Guess
+        if UserInput == "y":
+            print("O PANCHOD GUESS KR DITYAAAAAAAAAAAA O BANDARRRRRRRRRR!!!!!")
+            break
 
- while True:
-    UserInput = input("Type L For a Lower Guess, Type H for a Higher Guess, Type Y If the Answer is Correct : ").lower()
-    if UserInput == "l":
-       print(random.randint(0,UserNumber))
-       UserInput1 = input("Type L For a Lower Guess, Type H for a Higher Guess, Type Y If Answer Is Correct : ").lower()
 
-    if UserInput == "h":
-     print(random.randint(UserNumber,100))
-    UserInput2 = input("Type L For a Lower Guess, Type H for a Higher Guess, Type Y If Answer Is Correct : ").lower()
-    if UserInput == "y":
-     print("The bot has guessed it")
-     break
-    exit
+
 if GameMode_Selection == 2:
     import random
 
@@ -43,4 +53,3 @@ if GameMode_Selection == 2:
 
 if GameMode_Selection == 3:
     print("Not Playing?, Exiting.")
-    exit
